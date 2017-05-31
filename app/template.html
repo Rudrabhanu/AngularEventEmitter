@@ -1,0 +1,12 @@
+ <div>   
+    <h3>{{welcomeMsg | welcome}} </h3>			
+  	<p>The hero's birthday is {{ birthday | date:format }}</p>
+  	<p>Amount is {{12.9 | currency}}</p>
+	  <label>Search name</label>
+	  <input type="text" [(ngModel)]="username">
+	  <ul><li *ngFor="let val of data | searchbyname : username | orderbyname |  slice:0:limitValue">{{val?.name}}</li></ul>		
+	  <button (click)="onBtnClick()">click</button>
+		<!--<p>Child Componenent : {{childComponentSyncVal}}</p>-->
+		<child-comp [childCompValFromParent] = "childComponentSyncVal"></child-comp><br/>
+		<child-sibling-comp [childCompValFromParent] = "childComponentSyncVal"></child-sibling-comp>
+</div>

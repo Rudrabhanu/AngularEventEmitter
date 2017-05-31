@@ -1,0 +1,10 @@
+{
+    "files" : ["./app/**/*.{js, html, css}"],
+    "server" : { 
+        "baseDir" : ".",
+        "routes": {
+                "/node_modules": "node_modules"
+        } ,
+        "port":3000
+    }
+}
