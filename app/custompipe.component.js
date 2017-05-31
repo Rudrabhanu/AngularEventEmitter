@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var user_service_1 = require('./user.service');
 var shared_service_1 = require('./component/shared.service');
+var child_comp_1 = require('./component/child.comp');
 var CustomPipeComponent = (function () {
     function CustomPipeComponent(userService, sharedService) {
         this.userService = userService;
@@ -22,15 +23,13 @@ var CustomPipeComponent = (function () {
         this.limitValue = 100;
         this.username = '';
         this.data = [
-            { name: "Rudra", age: "26" },
-            { name: "Biswajit", age: "27" },
-            { name: "Aditya", age: "25" },
-            { name: "Otty", age: "28" },
-            { name: "Satya", age: "23" },
-            { name: "Manas", age: "24" },
-            { name: "Saroj", age: "29" }
+            { name: "Rudra", age: "26" }, { name: "Biswajit", age: "27" }, { name: "Aditya", age: "25" }, { name: "Otty", age: "28" },
+            { name: "Satya", age: "23" }, { name: "Manas", age: "24" }, { name: "Saroj", age: "29" }
         ];
     }
+    CustomPipeComponent.prototype.onResize = function (event) {
+        console.log(event.target.innerWidth);
+    };
     CustomPipeComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.subscription = this.userService.userEvEmitObj.subscribe(function (data) { return _this.eventEmittedFn(data); });
@@ -49,6 +48,19 @@ var CustomPipeComponent = (function () {
         this.childComponentSyncVal = ev;
         this.sharedService.siblingEmitService(ev);
     };
+    CustomPipeComponent.prototype.incrementFn = function () {
+        this.cmp.amount += 20000;
+    };
+    __decorate([
+        core_1.ViewChild(child_comp_1.childComponent), 
+        __metadata('design:type', child_comp_1.childComponent)
+    ], CustomPipeComponent.prototype, "cmp", void 0);
+    __decorate([
+        core_1.HostListener('window:resize', ['$event']), 
+        __metadata('design:type', Function), 
+        __metadata('design:paramtypes', [Object]), 
+        __metadata('design:returntype', void 0)
+    ], CustomPipeComponent.prototype, "onResize", null);
     CustomPipeComponent = __decorate([
         core_1.Component({
             selector: 'pipe-app',

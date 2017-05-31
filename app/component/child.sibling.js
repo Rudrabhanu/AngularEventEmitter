@@ -14,6 +14,7 @@ var childSiblingComponent = (function () {
     function childSiblingComponent(sharedService) {
         this.sharedService = sharedService;
         this.evSiblingEmit = new core_1.EventEmitter();
+        this.isSpecial = false;
     }
     childSiblingComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -26,6 +27,10 @@ var childSiblingComponent = (function () {
     childSiblingComponent.prototype.ngOnDestroy = function () {
         this.subscribeService.unsubscribe();
     };
+    childSiblingComponent.prototype.togglecolor = function () {
+        this.isSpecial = !this.isSpecial;
+        this.header.nativeElement.style.color = (this.header.nativeElement.style.color === 'green') ? 'red' : 'green';
+    };
     __decorate([
         core_1.Input(), 
         __metadata('design:type', String)
@@ -34,10 +39,14 @@ var childSiblingComponent = (function () {
         core_1.Output(), 
         __metadata('design:type', Object)
     ], childSiblingComponent.prototype, "evSiblingEmit", void 0);
+    __decorate([
+        core_1.ViewChild('header'), 
+        __metadata('design:type', core_1.ElementRef)
+    ], childSiblingComponent.prototype, "header", void 0);
     childSiblingComponent = __decorate([
         core_1.Component({
             selector: 'child-sibling-comp',
-            template: " <div>\n                <label><strong>Child Sibling Componenet :</strong></label>\n                <input type=\"text\" (ngModelChange)=\"childCompValUpdate(comp.value)\" #comp  [(ngModel)] =\"childCompVal\" >\n             </div> "
+            template: " <div>\n                <label><strong>Child Sibling Componenet :</strong></label>\n                <h3 #header> Header </h3>\n                <input type=\"text\" (ngModelChange)=\"childCompValUpdate(comp.value)\" #comp  [(ngModel)] =\"childCompVal\" /><br/>\n                <button (click)=\"togglecolor()\" style=\"margin-top:20px\">Click Me to Change Header color</button>\n             </div> "
         }), 
         __metadata('design:paramtypes', [shared_service_1.SharedService])
     ], childSiblingComponent);

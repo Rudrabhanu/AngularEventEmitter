@@ -5,8 +5,12 @@
 	  <label>Search name</label>
 	  <input type="text" [(ngModel)]="username">
 	  <ul><li *ngFor="let val of data | searchbyname : username | orderbyname |  slice:0:limitValue">{{val?.name}}</li></ul>		
-	  <button (click)="onBtnClick()">click</button>
-		<!--<p>Child Componenent : {{childComponentSyncVal}}</p>-->
+	  
+		<div style="margin-bottom:10px;">
+			<button (click)="onBtnClick()">click</button>		
+			<button (click)="incrementFn()">Increment Amount from Parent</button>
+		</div>
+		
 		<child-comp [childCompValFromParent] = "childComponentSyncVal"></child-comp><br/>
 		<child-sibling-comp [childCompValFromParent] = "childComponentSyncVal"></child-sibling-comp>
 </div>
